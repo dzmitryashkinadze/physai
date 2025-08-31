@@ -1,3 +1,6 @@
 *.db
 *.pyc
 *.egg-info
+plans
+.venv
+__pycache__
