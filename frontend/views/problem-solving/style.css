@@ -1,0 +1,141 @@
+.problem-container {
+    display: flex;
+    gap: 10px; /* Slim gap between columns */
+    flex-grow: 1; /* Take up remaining space in main */
+    height: 100%; /* Ensure it takes full height of its parent */
+}
+
+.column-toolbar {
+    width: 100%;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the start */
+    font-weight: bold;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.toolbar-title {
+    font-size: 1.1em;
+    color: #333;
+}
+
+#problem-statement {
+    flex: 1;
+    border: 1px solid #ccc; /* Border for left column */
+    height: 100%; /* Full height of parent */
+    overflow-y: auto; /* Slider for tall content */
+    border-radius: 8px; /* Slightly rounded corners */
+    display: flex;
+    flex-direction: column;
+}
+
+#problem-statement .column-content {
+    padding: 1rem;
+    overflow-y: auto; /* Ensure content scrolls if it overflows */
+    flex-grow: 1; /* Allow content to take remaining space */
+}
+
+.right-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc; /* Border for right column */
+    height: 100%; /* Full height of parent */
+    overflow-y: auto; /* Slider for tall content */
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
+.right-pane #equations-container {
+    padding: 1rem;
+    overflow-y: auto; /* Ensure content scrolls if it overflows */
+    flex-grow: 1; /* Allow content to take remaining space */
+}
+
+#equations-container {
+    flex: 1; /* Allow it to take available space in the column flex */
+    display: flex;
+    flex-direction: column;
+    /* Add some padding or margin if needed */
+}
+
+.equation-input-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.math-field-container {
+    flex-grow: 1;
+}
+
+.remove-equation-button {
+    background-color: transparent;
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px;
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    cursor: pointer;
+    width: 30px; /* Make it square */
+    height: 30px; /* Make it square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-equation-button:hover {
+    background-color: #eee; /* Light grey on hover */
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+h3 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+
+
+
+
+#submit-solution {
+    /* Removed display: block, width: 100%, and margin-top: 20px for toolbar integration */
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.dropdown-content.show {
+    display: flex;
+}
+
+.mq-editable-field {
+    border: none !important;
+}
