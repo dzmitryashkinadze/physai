@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, String, Text, Integer, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship, DeclarativeBase
-from sqlalchemy.dialects.postgresql import UUID
+
 from sqlalchemy.types import JSON
 import uuid
 
@@ -13,7 +13,7 @@ class Base(DeclarativeBase):
 
 class Course(Base):
     __tablename__ = "courses"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=uuid.uuid4)
     title = Column(String, index=True)
     summary = Column(Text)
     logo_url = Column(String)
@@ -24,7 +24,7 @@ class Course(Base):
 
 class Problem(Base):
     __tablename__ = "problems"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=uuid.uuid4)
     title = Column(String, index=True)
     description = Column(Text)
     solution_markdown = Column(Text)
@@ -34,7 +34,7 @@ class Problem(Base):
     difficulty = Column(String)
     figures = Column(JSON) # For SQLite, this will store JSON as TEXT
     order = Column(Integer)
-    course_id = Column(UUID(as_uuid=True), ForeignKey("courses.id"))
+    course_id = Column(String(36), ForeignKey("courses.id"))
 
     course = relationship("Course", back_populates="problems")
     problem_topics = relationship("ProblemTopic", back_populates="problem")
@@ -42,14 +42,14 @@ class Problem(Base):
 
 class Topic(Base):
     __tablename__ = "topics"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=uuid.uuid4)
     name = Column(String, unique=True, index=True)
 
     problem_topics = relationship("ProblemTopic", back_populates="topic")
 
 class PhysicsLaw(Base):
     __tablename__ = "physics_laws"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=uuid.uuid4)
     name = Column(String, unique=True, index=True)
     equation = Column(Text)
 
@@ -58,16 +58,16 @@ class PhysicsLaw(Base):
 # Junction Tables
 class ProblemTopic(Base):
     __tablename__ = "problem_topics"
-    problem_id = Column(UUID(as_uuid=True), ForeignKey("problems.id"), primary_key=True)
-    topic_id = Column(UUID(as_uuid=True), ForeignKey("topics.id"), primary_key=True)
+    problem_id = Column(String(36), ForeignKey("problems.id"), primary_key=True)
+    topic_id = Column(String(36), ForeignKey("topics.id"), primary_key=True)
 
     problem = relationship("Problem", back_populates="problem_topics")
     topic = relationship("Topic", back_populates="problem_topics")
 
 class ProblemPhysicsLaw(Base):
     __tablename__ = "problem_physics_laws"
-    problem_id = Column(UUID(as_uuid=True), ForeignKey("problems.id"), primary_key=True)
-    physics_law_id = Column(UUID(as_uuid=True), ForeignKey("physics_laws.id"), primary_key=True)
+    problem_id = Column(String(36), ForeignKey("problems.id"), primary_key=True)
+    physics_law_id = Column(String(36), ForeignKey("physics_laws.id"), primary_key=True)
 
     problem = relationship("Problem", back_populates="problem_physics_laws")
     physics_law = relationship("PhysicsLaw", back_populates="problem_physics_laws")

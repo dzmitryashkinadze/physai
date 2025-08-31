@@ -11,8 +11,13 @@ dependencies = [
     "pydantic-settings==2.3.3",
     "sympy==1.12",
     "numpy==1.26.4",
+    "alembic>=1.16.5",
 ]
 
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["*", "physics_engine*"]
+exclude = ["plans*"]
